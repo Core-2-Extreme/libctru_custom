@@ -116,8 +116,8 @@ dist-src:
 dist: dist-src dist-bin
 
 install: dist-bin
-	mkdir -p $(DESTDIR)$(DEVKITPRO)/libctru
-	bzip2 -cd libctru-$(VERSION).tar.bz2 | tar -xf - -C $(DESTDIR)$(DEVKITPRO)/libctru
+	mkdir -p $(DESTDIR)$(DEVKITPRO)/extra_lib
+	bzip2 -cd libctru-$(VERSION).tar.bz2 | tar -xf - -C $(DESTDIR)$(DEVKITPRO)/extra_lib
 
 lib:
 	@[ -d $@ ] || mkdir -p $@

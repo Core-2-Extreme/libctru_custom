@@ -36,7 +36,7 @@ static addrMapNode* getNode(void* addr)
 
 static addrMapNode* newNode(const MemChunk& chunk)
 {
-	auto p = (addrMapNode*)malloc(sizeof(addrMapNode));
+	auto p = (addrMapNode*)malloc_heap(sizeof(addrMapNode));
 	if (!p) return nullptr;
 	p->chunk = chunk;
 	return p;

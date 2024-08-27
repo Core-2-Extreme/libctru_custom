@@ -210,7 +210,7 @@ static Result uds_Initialize(u32 sharedmem_size, const char *username)
 	__uds_sharedmem_size = sharedmem_size;
 	__uds_sharedmem_handle = 0;
 
-	__uds_sharedmem_addr = memalign(0x1000, __uds_sharedmem_size);
+	__uds_sharedmem_addr = memalign_heap(0x1000, __uds_sharedmem_size);
 	if(__uds_sharedmem_addr==NULL)ret = -1;
 
 	if (R_SUCCEEDED(ret))

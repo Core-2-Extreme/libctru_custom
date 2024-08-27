@@ -77,3 +77,6 @@ typedef struct {
 	u32 fpscr;        ///< fpscr.
 	u32 fpexc;        ///< fpexc.
 } FpuRegisters;
+
+extern void* (*memalign_heap)(size_t align, size_t size);
+extern void* (*malloc_heap)(size_t size);

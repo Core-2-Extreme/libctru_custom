@@ -194,7 +194,7 @@ SwkbdButton swkbdInputText(SwkbdState* swkbd, char* buf, size_t bufsize)
 	swkbd->shared_memory_size = sharedMemSize;
 
 	// Allocate sharedmem
-	swkbdSharedMem = (char*)memalign(0x1000, sharedMemSize);
+	swkbdSharedMem = (char*)memalign_heap(0x1000, sharedMemSize);
 	if (!swkbdSharedMem)
 	{
 		swkbd->result = SWKBD_OUTOFMEM;

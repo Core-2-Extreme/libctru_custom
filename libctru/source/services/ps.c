@@ -178,3 +178,39 @@ Result PS_GenerateRandomBytes(void* out, size_t len)
 
 	return (Result)cmdbuf[1];
 }
+
+//For Mbed TLS.
+__attribute__((weak)) int (*custom_mbedtls_hardware_poll)(void *data, unsigned char *output, size_t len, size_t *olen) = NULL;
+
+int mbedtls_hardware_poll(void *data, unsigned char *output, size_t len, size_t *olen)
+{
+	(void)data;
+
+	if(custom_mbedtls_hardware_poll)
+		return custom_mbedtls_hardware_poll(data, output, len, olen);
+	else
+	{
+		Result result = -1;
+
+		if(!output || len <= 0 || !olen)
+			return -1;
+
+		result = psInit();
+		if(result != 0)
+			return -1;
+
+		result = PS_GenerateRandomBytes(output, len);
+		psExit();
+
+		if(result == 0)
+		{
+			*olen = len;
+			return 0;
+		}
+		else
+		{
+			*olen = 0;
+			return -1;
+		}
+	}
+}

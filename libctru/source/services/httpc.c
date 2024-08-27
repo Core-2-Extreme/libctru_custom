@@ -40,7 +40,7 @@ Result httpcInit(u32 sharedmem_size)
 
 		if(__httpc_sharedmem_size)
 		{
-			__httpc_sharedmem_addr = memalign(0x1000, __httpc_sharedmem_size);
+			__httpc_sharedmem_addr = memalign_heap(0x1000, __httpc_sharedmem_size);
 			if(__httpc_sharedmem_addr==NULL)ret = -1;
 
 			if (R_SUCCEEDED(ret))

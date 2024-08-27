@@ -25,7 +25,7 @@ struct MemBlock
 
 	static MemBlock* Create(u8* base, u32 size)
 	{
-		auto b = (MemBlock*)malloc(sizeof(MemBlock));
+		auto b = (MemBlock*)malloc_heap(sizeof(MemBlock));
 		if (!b) return nullptr;
 		b->prev = nullptr;
 		b->next = nullptr;

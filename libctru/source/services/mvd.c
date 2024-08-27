@@ -417,11 +417,13 @@ Result mvdstdRenderVideoFrame(MVDSTD_Config* config, bool wait)
 	Result ret;
 
 	if(mvdstdRefCount==0)return -3;
-	if(config==NULL)return -1;
 	if(mvdstd_mode!=MVDMODE_VIDEOPROCESSING)return -2;
 
-	ret = MVDSTD_SetConfig(config);
-	if(ret!=MVD_STATUS_OK)return ret;
+	if(config)
+	{
+		ret = MVDSTD_SetConfig(config);
+		if(ret!=MVD_STATUS_OK)return ret;
+	}
 
 	ret = MVD_STATUS_BUSY;
 	while(ret==MVD_STATUS_BUSY)

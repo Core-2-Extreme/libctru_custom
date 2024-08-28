@@ -81,7 +81,8 @@ typedef enum
 	TR_APPJUMP    = 0x12,
 } APT_Transition;
 
-static void aptEventHandler(void *arg);
+//Removed "static" for debug.
+void aptEventHandler(void *arg);
 static APT_Command aptWaitForWakeUp(APT_Transition transition);
 
 // The following function can be overridden in order to log APT signals and notifications for debugging purposes

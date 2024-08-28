@@ -58,6 +58,13 @@ Thread threadCreate(ThreadFunc entrypoint, void* arg, size_t stack_size, int pri
 Handle threadGetHandle(Thread thread);
 
 /**
+ * @brief Retrieves the entry point for thread.
+ * @param thread libctru thread handle
+ * @return entry point address
+ */
+void* threadGetEntryPoint(Thread thread);
+
+/**
  * @brief Retrieves the exit code of a finished libctru thread.
  * @param thread libctru thread handle
  * @return Exit code

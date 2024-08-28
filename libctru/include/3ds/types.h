@@ -78,5 +78,8 @@ typedef struct {
 	u32 fpexc;        ///< fpexc.
 } FpuRegisters;
 
+//Can't be NULL, application must implement them.
 extern void* (*memalign_heap)(size_t align, size_t size);
 extern void* (*malloc_heap)(size_t size);
+//Can be NULL.
+extern int (*custom_mbedtls_hardware_poll)(void *data, unsigned char *output, size_t len, size_t *olen);

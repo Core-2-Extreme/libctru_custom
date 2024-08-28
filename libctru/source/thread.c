@@ -80,6 +80,12 @@ Handle threadGetHandle(Thread thread)
 	return thread->handle;
 }
 
+void* threadGetEntryPoint(Thread thread)
+{
+	if (!thread || thread->finished) return NULL;
+	return (void*)thread->ep;
+}
+
 int threadGetExitCode(Thread thread)
 {
 	if (!thread || !thread->finished) return 0;
@@ -116,7 +122,8 @@ Thread threadGetCurrent(void)
 {
 	ThreadVars* tv = getThreadVars();
 	if (tv->magic != THREADVARS_MAGIC)
-		__panic();
+		return NULL;
+
 	return tv->thread_ptr;
 }
 

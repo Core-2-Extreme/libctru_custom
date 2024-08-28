@@ -424,7 +424,9 @@ _receiveState:
 	}
 }
 
-static void ndspThreadMain(void* arg)
+//Removed "static" for debug.
+void ndspThreadMain(void* arg);
+void ndspThreadMain(void* arg)
 {
 	ndspThreadRun = true;
 	while (ndspThreadRun)

@@ -31,7 +31,8 @@ static ThreadFunc gspEventCb[GSPGPU_EVENT_MAX];
 static void* gspEventCbData[GSPGPU_EVENT_MAX];
 static bool gspEventCbOneShot[GSPGPU_EVENT_MAX];
 
-static void gspEventThreadMain(void *arg);
+//Removed "static" for debug.
+void gspEventThreadMain(void *arg);
 
 static inline void gspWriteGxReg(u32 offset, u32 data)
 {

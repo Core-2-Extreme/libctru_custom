@@ -8,6 +8,23 @@
 extern "C" {
 #endif
 
+#if __GNUC__
+//We don't want to see warnings in 3rd party headers.
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wpedantic"
+#pragma GCC diagnostic ignored "-Wredundant-decls"
+
+#ifdef __cplusplus
+//C++ only.
+#pragma GCC diagnostic ignored "-Wc++20-extensions"
+#else
+//C only.
+#pragma GCC diagnostic ignored "-Wnested-externs"
+#pragma GCC diagnostic ignored "-Wstrict-prototypes"
+#endif //__cplusplus
+
+#endif //__GNUC__
+
 #if defined(_3DS) && !defined(__3DS__)
 #warning "Please update your Makefile and replace -DARM11 -D_3DS with -D__3DS__"
 #define __3DS__
@@ -104,6 +121,10 @@ extern "C" {
 
 #include <3ds/gdbhio_dev.h>
 #include <3ds/3dslink.h>
+
+#if __GNUC__
+#pragma GCC diagnostic pop
+#endif //__GNUC__
 
 #ifdef __cplusplus
 }

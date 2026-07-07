@@ -180,36 +180,34 @@ Result PS_GenerateRandomBytes(void* out, size_t len)
 }
 
 //For Mbed TLS.
-__attribute__((weak)) int (*custom_mbedtls_hardware_poll)(void *data, unsigned char *output, size_t len, size_t *olen) = NULL;
+__attribute__((weak)) int (*custom_mbedtls_platform_get_entropy)(uint32_t flags, size_t *estimate_bits, unsigned char *output, size_t output_size) = NULL;
 
-int mbedtls_hardware_poll(void *data, unsigned char *output, size_t len, size_t *olen)
+int mbedtls_platform_get_entropy(uint32_t flags, size_t *estimate_bits, unsigned char *output, size_t output_size)
 {
-	(void)data;
-
-	if(custom_mbedtls_hardware_poll)
-		return custom_mbedtls_hardware_poll(data, output, len, olen);
+	if(custom_mbedtls_platform_get_entropy)
+		return custom_mbedtls_platform_get_entropy(flags, estimate_bits, output, output_size);
 	else
 	{
 		Result result = -1;
 
-		if(!output || len <= 0 || !olen)
+		if(!estimate_bits || !output || output_size <= 0)
 			return -1;
 
 		result = psInit();
 		if(result != 0)
 			return -1;
 
-		result = PS_GenerateRandomBytes(output, len);
+		result = PS_GenerateRandomBytes(output, output_size);
 		psExit();
 
 		if(result == 0)
 		{
-			*olen = len;
+			*estimate_bits = (output_size * 8);
 			return 0;
 		}
 		else
 		{
-			*olen = 0;
+			*estimate_bits = 0;
 			return -1;
 		}
 	}

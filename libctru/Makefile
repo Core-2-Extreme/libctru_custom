@@ -95,10 +95,10 @@ export INCLUDE	:=	$(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir)) \
 			$(foreach dir,$(LIBDIRS),-I$(dir)/include) \
 			-I.
 
-.PHONY: clean all lib/libctru.a lib/libctrud.a
+.PHONY: clean all lib/libctru.a #lib/libctrud.a
 
 #---------------------------------------------------------------------------------
-all: lib/libctru.a lib/libctrud.a
+all: lib/libctru.a #lib/libctrud.a
 
 install: all
 	mkdir -p $(DESTDIR)$(DEVKITPRO)/extra_lib
@@ -119,12 +119,12 @@ lib/libctru.a : lib release $(SOURCES) $(INCLUDES)
 	--no-print-directory -C release \
 	-f $(CURDIR)/Makefile
 
-lib/libctrud.a : lib debug $(SOURCES) $(INCLUDES)
-	@$(MAKE) BUILD=debug OUTPUT=$(CURDIR)/$@ \
-	BUILD_CFLAGS="-DDEBUG=1 -Og" \
-	DEPSDIR=$(CURDIR)/debug \
-	--no-print-directory -C debug \
-	-f $(CURDIR)/Makefile
+# lib/libctrud.a : lib debug $(SOURCES) $(INCLUDES)
+# 	@$(MAKE) BUILD=debug OUTPUT=$(CURDIR)/$@ \
+# 	BUILD_CFLAGS="-DDEBUG=1 -Og" \
+# 	DEPSDIR=$(CURDIR)/debug \
+# 	--no-print-directory -C debug \
+# 	-f $(CURDIR)/Makefile
 
 #---------------------------------------------------------------------------------
 clean:

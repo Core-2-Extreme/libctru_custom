@@ -37,7 +37,7 @@ INCLUDES	:=	include
 #---------------------------------------------------------------------------------
 ARCH	:=	-march=armv6k -mtune=mpcore -mfloat-abi=hard -mtp=soft
 
-CFLAGS	:=	-g -Wall -Werror -mword-relocations \
+CFLAGS	:=	-Wall -Werror -mword-relocations \
 			-ffunction-sections \
 			-fdata-sections \
 			$(ARCH) \
@@ -47,7 +47,7 @@ CFLAGS	+=	$(INCLUDE) -D__3DS__
 
 CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions -std=gnu++11
 
-ASFLAGS	:=	-g $(ARCH) $(INCLUDE)
+ASFLAGS	:=	$(ARCH) $(INCLUDE)
 
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
